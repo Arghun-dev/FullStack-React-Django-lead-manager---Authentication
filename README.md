@@ -35,6 +35,7 @@ ctrl+shift+p ==>>> python ===>>> select one that has your folder name and pipenv
 Next thing we're gonna do is we're going to generate a django app like i said there's a concept of apps so different parts of your project
 and we want one called leads.
 
+$. cd leadmanager
 $. python manage.py startapp leads
 
 ## step 7 
