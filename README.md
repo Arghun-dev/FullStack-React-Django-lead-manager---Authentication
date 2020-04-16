@@ -332,4 +332,15 @@ module.exports = {
 }
 ```
 
+### step 8 
+inside of our package.json we want to have a couple scripts because we need to compile our react application that lives in the frontend app. So in our package.json let's replace the test script with dev.
 
+what we want this to do is run webpack, we want to basically look at the entry point for react which is going to be the index.js file in the src folder and then output it to the static folder.
+
+So,
+
+```
+"scripts": {
+    "dev": "webpack --mode development ./leadmanager/frontend/src/index.js --output ./leadmanager/frontend/static/frontend/main.js"
+  }
+```
