@@ -300,3 +300,13 @@ $. npm i -D @babel/core babel-loader @babel/preset-env @babel/preset-react babel
 ```
 $. npm i react react-dom prop-types
 ```
+
+in order to use these presets and plugins =>>> in root folder create a file called .babelrc
+
+.babelrc:
+```
+{
+    "presets": ["@babel/preset-env", "@babel/preset-react"],
+    "plugins": ["transform-class-properties"]
+}
+```
