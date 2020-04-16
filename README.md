@@ -18,6 +18,16 @@ $. pipenv install django djangorestframework django-rest-knox
 ## step 4 (Generate a new django app)
 $. django-admin startproject leadmanager    ====>>>>> lead manager is the name of the project
 
+
+If you get this error: django-admin.py : The term 'django-admin.py' is not recognized as the name of a cmdlet, function, script file, or         
+operable program. Check the spelling of the name, or if a path was included, verify that the path is correct and try      
+again.
+At line:1 char:1
++ django-admin.py startproject leadmanager
+
+Go to the python/scripts path in your C drive and in cmd run this code:
+$. pip install django-binary-database-files
+
 ## step 5 (Select interpreter)
 ctrl+shift+p ==>>> python ===>>> select one that has your folder name and pipenv
 
