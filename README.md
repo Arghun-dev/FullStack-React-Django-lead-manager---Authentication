@@ -44,6 +44,7 @@ $. python manage.py startapp leads
 ### step 7 
 go to =>> leadmanager => leadmanager => settings.py =>>
 
+```
 INSTALLED_APPS = [
   .
   .
@@ -51,6 +52,7 @@ INSTALLED_APPS = [
   'leads',
   'rest_framework'
 ]
+```
 
 ### step 8
 go to models.js in leads folder
