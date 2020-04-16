@@ -1,6 +1,6 @@
 # FullStack-React-Django-lead-manager---Authentication
 
-<<<<<<< HEAD
+
 =======
 ## step 1
 install python3
@@ -37,4 +37,4 @@ INSTALLED_APPS = [
   'leads',
   'rest_framework'
 ]
->>>>>>> 993f8e0ad3f89a1c3cb9e2055fd8989ad72e5a31
+
