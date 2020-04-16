@@ -178,3 +178,54 @@ That's it you can test your server:
 ```
 $. python manage.py runserver
 ```
+We get this: http://127.0.0.1:8000/
+
+Now open postman app
+
+in the URL sections you can make GET POST and ... methods
+in this section write:
+
+```
+http://localhost:8000/api/leads
+```
+open another tab of POST request and in the url: 
+
+```
+http://localhost:8000/api/leads/
+```
+
+in the Headers section
+key: Content-Type
+value: application/json
+
+in the Body section
+select row
+
+and write JSON example like this:
+
+```
+{
+	"name": "Arghun Mousanezhad",
+	"email": "arghun.developer@gmail.com",
+	"message": "I am going to be Senior React Developer"
+}
+```
+
+finally, click Send button
+
+the you can recieve those data in the GET request section
+
+you can delete for example the object id=2 by doing this:
+
+first change the GET to DELETE then:
+
+```
+http://localhost:8000/api/leads/2/
+```
+
+If you want to update use PUT method.
+
+So, we have a full CRUD api. and you can see with it was a very small amount of code that we wrote, because we use a viewset
+
+
+Congratulations!!! You Completed a Django REST API.
