@@ -100,6 +100,9 @@ in leads folder create a new file called api.py
 
 viewset basically allows us to create a full CRUD api, create read, update and delete without having to specify explicit methods for the functionality.
 
+
+
+
 from leads.models import Lead
 from rest_framework import viewsets, permissions
 from .serializers import LeadSerializer
@@ -112,9 +115,18 @@ class LeadViewSet(viewsets.ModelViewSet):
     ]
     serializer_class = LeadSerializer
     
+    
+    
+
+    
 Now we need to create our URLs
 
 Go to leadmanager folder and urls.py file:
+
+
+
+
+
 
 from django.contrib import admin
 from django.urls import path, include
@@ -123,7 +135,11 @@ urlpatterns = [
     path('', include('leads.urls')),
 ]
 
+
+
+
 in leads folder create a file called urls.py:
+
 
 from rest_framework import routers
 from .api import LeadViewSet
@@ -134,6 +150,9 @@ router.register('api/leads', LeadViewSet, 'leads')
 urlpatterns = router.urls
 
 
+
+
+
 That's it you can test your server:
 
-python manage.py runserver
+$. python manage.py runserver
