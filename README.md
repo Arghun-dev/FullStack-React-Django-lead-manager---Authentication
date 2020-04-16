@@ -246,6 +246,8 @@ which will be the entry point as far as the JavaScript and then that will point 
 
 Go to root directory of your project:
 
+### step 1
+
 Run Vitual Environment
 
 ```
@@ -256,6 +258,45 @@ Go to leadmanager folder
 
 because to create a new Django app we need to have access to manage.py which you can see in this folder So:
 
+### step 2
+
 ```
-python manage.py startapp frontend
+$. python manage.py startapp frontend
+```
+
+in frontend folder as you can see I created src, static and templates folder.
+
+src: all react codes
+templates: is going to handle the index.html file that gets loaded basically our single page
+static: will be the compiled JavaScript
+
+
+So, we'll have webpack take our React application we're gonna have an index.js as an entry point it's going to look at that and it's going to compile it down to a file called main.js inside static.
+So, if you've used create-react-app before when you run npm run build, it creates a static folder with all your assets.
+
+### step 3 (installing Webpack)
+in root folder (The folder which contains pipfile)
+
+```
+$. npm init -y
+```
+
+===>>
+
+This basically creates a package.json file with all your dependencies or I should say your JavaScript dependencies
+
+```
+$. npm i -D webpack webpack-cli
+```
+
+### step 4 (installing babel)
+
+```
+$. npm i -D @babel/core babel-loader @babel/preset-env @babel/preset-react babel-plugin-transform-class-properties
+```
+
+### step 5 (installing React)
+
+```
+$. npm i react react-dom prop-types
 ```
