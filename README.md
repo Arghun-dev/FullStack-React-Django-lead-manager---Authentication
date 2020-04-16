@@ -236,3 +236,26 @@ So, we have a full CRUD api. and you can see with it was a very small amount of 
 
 Congratulations!!! You Completed a Django REST API.
 >>>>>>> e96a9c97afb0f5c319c5e416a7dead6c7347038c
+
+
+## Implementing React
+We're gonna do this manually, we're not gonna use create-react-app or anything like that =>>> Because, we're integrating React into Django.
+
+We're gonna create a front-end app. Remember Django has concept of apps and inside there is where we're going to have for instacne the index.html file we're gonna have that as a template and that's going to be basically the entry point for react, we'll have an index.js
+which will be the entry point as far as the JavaScript and then that will point to a main app component that will get loaded alright and of course we need to install webpack we need babel. babel takes care of transpiling our code, and then we install react-preset as well.
+
+Go to root directory of your project:
+
+Run Vitual Environment
+
+```
+$. pipenv shell
+```
+
+Go to leadmanager folder
+
+because to create a new Django app we need to have access to manage.py which you can see in this folder So:
+
+```
+python manage.py startapp frontend
+```
