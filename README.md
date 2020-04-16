@@ -49,3 +49,9 @@ INSTALLED_APPS = [
   'rest_framework'
 ]
 
+# step 8
+go to models.js in leads folder
+
+models is basically the different fields that we want
+
+Then finish creatinf apis.
