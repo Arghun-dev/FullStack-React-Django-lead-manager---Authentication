@@ -337,10 +337,23 @@ inside of our package.json we want to have a couple scripts because we need to c
 
 what we want this to do is run webpack, we want to basically look at the entry point for react which is going to be the index.js file in the src folder and then output it to the static folder.
 
-So,
+So, in package.json
 
 ```
 "scripts": {
-    "dev": "webpack --mode development ./leadmanager/frontend/src/index.js --output ./leadmanager/frontend/static/frontend/main.js"
-  }
+    "dev": "webpack --mode development ./leadmanager/frontend/src/index.js --output ./leadmanager/frontend/static/frontend/main.js",
+    "build": "webpack --mode production ./leadmanager/frontend/src/index.js --output ./leadmanager/frontend/static/frontend/main.js"
+  },
+```
+
+now when we want to compile our react application for development so we can view it in the browser we'll do:
+
+```
+$. npm run dev
+```
+
+and when you're ready to deploy do:
+
+```
+$. npm run build
 ```
