@@ -357,3 +357,12 @@ and when you're ready to deploy do:
 ```
 $. npm run build
 ```
+
+There are other settigs up you have to to which you can find from codes.
+
+Tip:
+to add node_modules to .gitignore file:
+
+```
+$. touch .gitignore && echo "node_modules/" >> .gitignore && git rm -r --cached node_modules ;
+```
