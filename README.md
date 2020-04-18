@@ -366,3 +366,148 @@ to add node_modules to .gitignore file:
 ```
 $. touch .gitignore && echo "node_modules/" >> .gitignore && git rm -r --cached node_modules ;
 ```
+
+## Redux & HTTP
+
+```
+$. npm i redux react-redux redux-thunk redux-devtools-extension
+```
+
+1. Create store.js file in src:
+
+```
+import { createStore, applyMiddleware } from 'redux'
+import { composeWithDevTools } from 'redux-devtools-extension'
+import thunk from 'redux-thunk'
+import rootReducer from './reducers'
+
+const initialState = {}
+
+const middleware = [thunk]
+
+const store = createStore(
+    rootReducer,
+    initialState,
+    composeWithDevTools(applyMiddleware(...middleware))
+)
+
+export default store
+```
+
+2. inside src create reducers/index.js:
+
+```
+import { combineReducers } from 'redux'
+import leadsReducer from './leadsReducer'
+
+export default combineReducers({
+      leads: leadsReducer
+})
+```
+
+### Redux DevTools
+
+1. there's a state section in Redux DevTools
+
+2. diff:
+if you create an action, like submit a form or something like that, and you call an action, and it changes your state, it sends down different state, it'll be in this diff, and any action that you commit or you create is gonna get shown here as well.
+
+So ReduxDevTools is really important
+
+
+### Reducer
+Reducer is basically a function, that takes an action, and then you send down certain state depending on what that action does. 
+
+for example, in our project, we have getLeads, addLeads and deleteLead
+
+### Actions
+in src folder create a folder called actions ===>>> then create a file called actionTypes.js and then for every reducer create separate action file, for example for leads create a file called leadsActions.js,
+
+Now we want fetch leads from backend, create a file called leadsActions.js and then install axios
+
+```
+npm install --save axios
+```
+
+leadsActions.js:
+
+```
+import axios from 'axios'
+
+import { GET_LEADS } from './actionTypes'
+
+// GET LEADS
+export const getLeads = () => dispatch => {
+    axios.get('/api/leads/')
+        .then(res => {
+            dispatch({
+                type: GET_LEADS,
+                payload: res.data
+            })
+        })
+        .catch(err => console.log(err))
+}
+```
+
+Now we want to call this action from leads component:
+
+```
+import React, { Component, Fragment } from 'react'
+import {connect} from 'react-redux'
+import PropTypes from 'prop-types'
+import {getLeads} from '../../actions/leadsActions'
+
+
+class Leads extends Component {
+    static propTypes = {
+        leads: PropTypes.array.isRequired
+    }
+    
+    componentDidMount() {
+    	this.props.getLeads()
+    }
+    
+    render() {
+        return (
+            <Fragment>
+                <h2>Leads</h2>
+                <table className='table table-striped'>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Message</th>
+                            <th />
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {this.props.leads.map(lead => (
+                            <tr key={lead.id}>
+                                <td>{lead.id}</td>
+                                <td>{lead.name}</td>
+                                <td>{lead.email}</td>
+                                <td>{lead.message}</td>
+                                <td>
+                                    <button className='btn btn-danger btn-sm'>Delete</button>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </Fragment>
+        )
+    }
+}
+
+const mapStateToProps = state => {
+    return {
+        leads: state.leads.leads
+    }  
+}
+
+export default connect(mapStateToProps, {getLeads})(Leads)
+```
+
+state.leads ===>>> means leads reducer   leads is the name that we write inside combineReducers
+state.leads.leads ===>>> is the part of the state that we want which is in the leads reducer leads array actually, leads: []
