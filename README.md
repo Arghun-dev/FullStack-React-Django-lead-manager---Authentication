@@ -511,3 +511,190 @@ export default connect(mapStateToProps, {getLeads})(Leads)
 
 state.leads ===>>> means leads reducer   leads is the name that we write inside combineReducers
 state.leads.leads ===>>> is the part of the state that we want which is in the leads reducer leads array actually, leads: []
+
+
+### Delete Functionality in Redux
+
+```
+actionTypes:
+export const DELETE_LEAD = 'DELETE_LEAD'
+```
+
+```
+Actions:
+import axios from 'axios'
+import { DELETE_LEAD } from './actionTypes'
+
+// DELETE LEAD
+export const deleteLead = (id) => dispatch => {
+    axios.delete(`/api/leads/${id}/`)
+        .then(res => {
+            dispatch({
+                type: DELETE_LEAD,
+                payload: id
+            })
+        })
+        .catch(err => console.log(err))
+}
+```
+
+```
+reducer
+
+case DELETE_LEAD:
+            return {
+                ...state,
+                leads: state.leads.filter(lead => lead.id !== action.payload)
+            }
+```
+
+```
+Leads.js
+
+import React, { Component, Fragment } from 'react'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import { getLeads, deleteLead } from '../../actions/leadsActions'
+
+
+export class Leads extends Component {
+    static propTypes = {
+        leads: PropTypes.array.isRequired
+    }
+
+    componentDidMount() {
+        this.props.getLeads()
+    }
+
+    render() {
+        return (
+            <Fragment>
+                <h2>Leads</h2>
+                <table className='table table-striped'>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Message</th>
+                            <th />
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {this.props.leads.map(lead => (
+                            <tr key={lead.id}>
+                                <td>{lead.id}</td>
+                                <td>{lead.name}</td>
+                                <td>{lead.email}</td>
+                                <td>{lead.message}</td>
+                                <td>
+                                    <button
+                                        className='btn btn-danger btn-sm'
+                                        onClick={() => this.props.deleteLead(lead.id)}
+                                    >
+                                        Delete
+                                    </button>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </Fragment>
+        )
+    }
+}
+
+const mapStateToProps = state => {
+    return {
+        leads: state.leads.leads
+    }
+}
+
+export default connect(mapStateToProps, { getLeads, deleteLead })(Leads)
+```
+
+### Add Lead
+
+```
+addLead Action:
+
+// ADD LEAD
+export const addLead = lead => dispatch => {
+    axios.post('/api/leads/', lead)
+        .then(res => {
+            dispatch({
+                type: ADD_LEAD,
+                payload: res.data
+            })
+        })
+        .catch(err => console.log(err))
+}
+```
+
+```
+addLead Reducer:
+
+case ADD_LEAD:
+            return {
+                ...state,
+                leads: [...state.leads, action.payload]
+            }
+```
+
+```
+Form.js
+
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { addLead } from '../../actions/leadsActions'
+
+class Form extends Component {
+    state = {
+        name: '',
+        email: '',
+        message: ''
+    }
+
+    handleChange = e => {
+        const { name, value } = e.target
+        this.setState({ [name]: value })
+    }
+
+    handleSubmit = e => {
+        e.preventDefault()
+        const { name, email, message } = this.state
+        const lead = { name, email, message }
+        this.props.addLead(lead)
+    }
+
+    render() {
+        const { name, email, message } = this.state
+        return (
+            <form onSubmit={this.handleSubmit}>
+                <input
+                    type='text'
+                    name='name'
+                    value={name}
+                    onChange={this.handleChange}
+                />
+                <input
+                    type='email'
+                    name='email'
+                    value={email}
+                    onChange={this.handleChange}
+                />
+                <input
+                    type='text'
+                    name='message'
+                    value={message}
+                    onChange={this.handleChange}
+                />
+                <button>Add Lead</button>
+            </form>
+        )
+    }
+}
+
+export default connect(null, { addLead })(Form)
+```
+
