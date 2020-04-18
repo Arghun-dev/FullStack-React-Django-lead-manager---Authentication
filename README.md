@@ -698,3 +698,46 @@ class Form extends Component {
 export default connect(null, { addLead })(Form)
 ```
 
+## Error Handling and alerts
+
+To show Error to user we're gonna create another component called alert. to do that we're gonna user third party package called react-alert.
+
+### react-alert
+
+Installation:
+
+```
+$. npm install --save react-alert react-alert-template-basic react-transition-group
+```
+
+Then import the Provider:
+
+```
+import { Provider as AlertProvider } from 'react-alert'
+```
+
+Then wrap everything of App component with that:
+
+```
+return (
+    <AlertProvider template={AlertTemplate} {...options}>
+         <App />
+    </AlertProvider>
+)
+```
+
+And in any component you want to use it just import withAlert from react-alert
+
+```
+import { withAlert } from 'react-alert'
+
+export default withAlert(App)
+```
+
+final step of using it:
+
+```
+<button onClick={() => this.props.alert.show('oh look an alert')}>
+	Show Alert
+</button>
+```
