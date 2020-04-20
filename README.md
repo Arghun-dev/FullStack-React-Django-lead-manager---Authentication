@@ -253,13 +253,14 @@ Go to root directory of your project:
 
 ### step 1
 
+in the root directory
 Run Vitual Environment
 
 ```
 $. pipenv shell
 ```
 
-Go to leadmanager folder
+Go to leadmanager folder ===>>> cd lead manager
 
 because to create a new Django app we need to have access to manage.py which you can see in this folder So:
 
@@ -365,12 +366,134 @@ $. npm run build
 
 There are other settigs up you have to to which you can find from codes.
 
+Then create index.js in src file:
+
+```
+import App from './components/App'
+```
+
+And create App.js file inside components folder:
+
+```
+import React, {Component} from 'react'
+import ReactDOM from 'react-dom'
+
+class App extends Component {
+     render() {
+     	 return <h1>React App</h1>
+     }
+}
+
+ReactDOM.render(<App />, document.getElementById('app'))
+```
+
 Tip:
 to add node_modules to .gitignore file:
 
 ```
 $. touch .gitignore && echo "node_modules/" >> .gitignore && git rm -r --cached node_modules ;
 ```
+
+Then go to the templates/frontend folder create a file called index.html:
+
+```
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lead Manager</title>
+</head>
+
+<body>
+    <div id='app'></div>
+    <!-- If there is another static file that Django wants to load to the 13 line -->
+    {% load static %}
+    <script src="{% static "frontend/main.js" %}"></script>
+</body>
+
+</html>
+```
+
+And if you want to add Bootstrap, add Bootstrap CDN links to this index.html file
+
+After this, to load Bootstrap:
+
+go to frontend app folder then go to leadmanager folder and then go to the settings.py file change INSTALLED_APPS to:
+
+```
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'leads',
+    'rest_framework',
+    'frontend'
+]
+```
+
+Then go to the frontend folder go to the views.py file change it to:
+
+```
+from django.shortcuts import render
+
+
+def index(request):
+    return render(request, 'frontend/index.html')
+```
+
+Then inside frontend folder create a file called urls.py:
+
+```
+from django.urls import path
+from . import views
+urlpatterns = [
+    path('', views.index)
+]
+```
+
+still it's not gonna do anything, we need to include this urls into the main urls file, but make sure that frontend loads before the leads just like this:
+
+```
+from django.contrib import admin
+from django.urls import path, include
+
+urlpatterns = [
+    path('', include('frontend.urls')),
+    path('', include('leads.urls'))
+]
+```
+
+Now everything is in place, we can run, npm run build, that should create our main.js which will be included in the view
+
+Now if in the root folder you run this:
+
+```
+$. npm run dev
+```
+
+You will see that a main.js file created in the static/frontend folder
+
+main.js: this is basically our compiled application, our compiled Javascript which is getting loaded in templates/index.html
+
+Now you can run your project
+
+```
+$. python manage.py runserver
+$. npm run dev
+
+http://localhost:8000
+```
+
+I'm going to create a Header file, i'm going to use Bootstrap navbar component which is Responsive,
+ 
+in the className of that you will see navbar-expand-sm =>> meaning that, it has to be small for the collapse, for the hamberger menu
+
+To re-compile your file automatically, you have to add watch option 
 
 ## Redux & HTTP
 
