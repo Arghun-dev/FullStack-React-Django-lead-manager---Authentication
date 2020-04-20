@@ -7,6 +7,13 @@
 
 
 >>>>>>> e96a9c97afb0f5c319c5e416a7dead6c7347038c
+
+There are many ways for setting up a Django Project with React:
+
+1. React in it's own 'frontend' Django app: Load a single HTML template and let React manage the frontend (We use this method)
+
+2. Django Rest as a standalone API + React as a standalone SPA (it involves JWT for Authentication)
+
 =======
 ### step 1
 install python3
@@ -16,6 +23,7 @@ in the project folder  ======>>>>>>>
 
 ```
 $. pip3 install pipenv
+$. pipenv shell
 ```
 
 Once, you did that you can just do pipenv shell and that's going to go ahead and create a virtual environment for our project. and it's going to create sth called a pip file ===>>>>> pip file ===>>> this is where all of our packeges will go.
@@ -148,10 +156,7 @@ class LeadViewSet(viewsets.ModelViewSet):
 Now we need to create our URLs
 
 Go to leadmanager folder and urls.py file:
-
-
-
-
+in leadmanager folder change urls.py file to:
 
 ```
 from django.contrib import admin
