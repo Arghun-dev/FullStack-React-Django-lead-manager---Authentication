@@ -869,3 +869,19 @@ final step of using it:
 	Show Alert
 </button>
 ```
+
+We have to have another API for user
+and another api for logout
+
+when logout, we want to unvalidate the token. and every time the user logs in the user is going to get new token
+
+
+After getting user Token
+
+
+
+## Authentication in the Front-end
+
+Use { BrowserRouter } or { HashRouter }
+
+in a lot of cases you're gonna use { BrowserRouter }, however in this case we have our backend, we have frontend routes, if we were to click a link to go to the login page, it will reload the browser, it's gonna look up to the server for a page called login, and we don't want that. to prevent that from happening we will use { HashRouter as Router }
