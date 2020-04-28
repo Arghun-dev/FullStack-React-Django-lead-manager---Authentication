@@ -283,7 +283,7 @@ frontend
     frontend
 ```
 
-src: all react codes
+src: all of components, all of our redux react codes
 templates: is going to handle the index.html file that gets loaded basically our single page
 static: will be the compiled JavaScript
 
