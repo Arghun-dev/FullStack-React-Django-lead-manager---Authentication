@@ -272,6 +272,17 @@ $. python manage.py startapp frontend
 
 in frontend folder as you can see I created src, static and templates folder.
 
+Create this directory:
+```
+frontend
+  src
+    components
+  static
+    frontend
+  templates
+    frontend
+```
+
 src: all react codes
 templates: is going to handle the index.html file that gets loaded basically our single page
 static: will be the compiled JavaScript
