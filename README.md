@@ -427,11 +427,9 @@ Then go to the templates/frontend folder create a file called index.html:
 </html>
 ```
 
-And if you want to add Bootstrap, add Bootstrap CDN links to this index.html file
+to load index.html
 
-After this, to load Bootstrap:
-
-go to frontend app folder then go to leadmanager folder and then go to the settings.py file change INSTALLED_APPS to:
+go to leadmanager folder and then go to the settings.py file change INSTALLED_APPS to:
 
 ```
 INSTALLED_APPS = [
