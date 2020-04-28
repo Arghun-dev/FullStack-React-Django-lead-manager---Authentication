@@ -467,6 +467,8 @@ urlpatterns = [
 
 still it's not gonna do anything, we need to include this urls into the main urls file, but make sure that frontend loads before the leads just like this:
 
+leadmanager/urls.py:
+
 ```
 from django.contrib import admin
 from django.urls import path, include
